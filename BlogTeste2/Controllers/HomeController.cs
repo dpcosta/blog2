@@ -19,8 +19,7 @@ namespace BlogTeste2.Controllers
                 new Post { Titulo = "Monge e o Executivo", Resumo = "Romance sobre Liderança", Categoria = "Livro" },
                 new Post { Titulo = "New York, New York", Resumo = "Sucesso de Frank Sinatra", Categoria = "Música" }
             };
-            ViewBag.Posts = listaPosts;
-            return View();
+            return View(listaPosts);
         }
     }
 }
