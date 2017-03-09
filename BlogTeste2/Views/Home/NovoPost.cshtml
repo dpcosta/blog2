@@ -1,0 +1,30 @@
+﻿@model BlogTeste2.Models.Post
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Novo Post</title>
+</head>
+<body>
+    <div> 
+        <form action="/Home/AdicionaPost">
+            <label>
+                Título: <input name="titulo" />
+            </label>
+            <label>
+                Resumo: <input name="resumo" />
+            </label>
+            <label>
+                Categoria: <input name="categoria" />
+            </label>
+            <input type="submit" value="Cadastrar" />
+        </form>
+    </div>
+</body>
+</html>
