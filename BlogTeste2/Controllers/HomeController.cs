@@ -11,19 +11,6 @@ namespace BlogTeste2.Controllers
 {
     public class HomeController : Controller
     {
-        private IList<Post> lista;
-
-        public HomeController()
-        {
-            lista = new List<Post>
-            {
-                new Post { Titulo = "Harry Potter 1", Resumo = "Pedra Filosofal", Categoria = "Filme, Livro" },
-                new Post { Titulo = "Cassino Royale", Resumo = "007", Categoria = "Filme" },
-                new Post { Titulo = "Monge e o Executivo", Resumo = "Romance sobre Liderança", Categoria = "Livro" },
-                new Post { Titulo = "New York, New York", Resumo = "Sucesso de Frank Sinatra", Categoria = "Música" }
-            };
-        }
-
         // GET: Home
         public ActionResult Index()
         {
@@ -63,11 +50,10 @@ namespace BlogTeste2.Controllers
             {
                 cnx.Open();
                 SqlCommand comando = cnx.CreateCommand();
-                comando.CommandText = "insert into Posts (titulo, resumo, categoria) values ('"+ post.Titulo + "', '" + post.Resumo + "', '"+ post.Categoria + "')";
-                //comando.CommandText = "insert into Posts (titulo, resumo, categoria) values (@titulo, @resumo, @categoria)";
-                //comando.Parameters.Add(new SqlParameter("titulo", post.Titulo));
-                //comando.Parameters.Add(new SqlParameter("resumo", post.Resumo));
-                //comando.Parameters.Add(new SqlParameter("categoria", post.Categoria));
+                comando.CommandText = "insert into Posts (titulo, resumo, categoria) values (@titulo, @resumo, @categoria)";
+                comando.Parameters.Add(new SqlParameter("titulo", post.Titulo));
+                comando.Parameters.Add(new SqlParameter("resumo", post.Resumo));
+                comando.Parameters.Add(new SqlParameter("categoria", post.Categoria));
                 comando.ExecuteNonQuery();
             }
             return RedirectToAction("Index");
