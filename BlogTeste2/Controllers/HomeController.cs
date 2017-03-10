@@ -33,6 +33,7 @@ namespace BlogTeste2.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult AdicionaPost(Post post)
         {
             lista.Add(post);
