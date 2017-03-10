@@ -63,7 +63,11 @@ namespace BlogTeste2.Controllers
             {
                 cnx.Open();
                 SqlCommand comando = cnx.CreateCommand();
-                comando.CommandText = "insert into Posts (titulo, resumo, categoria) values ('" + post.Titulo + "','" + post.Resumo + "','" + post.Categoria + "')";
+                comando.CommandText = "insert into Posts (titulo, resumo, categoria) values ('"+ post.Titulo + "', '" + post.Resumo + "', '"+ post.Categoria + "')";
+                //comando.CommandText = "insert into Posts (titulo, resumo, categoria) values (@titulo, @resumo, @categoria)";
+                //comando.Parameters.Add(new SqlParameter("titulo", post.Titulo));
+                //comando.Parameters.Add(new SqlParameter("resumo", post.Resumo));
+                //comando.Parameters.Add(new SqlParameter("categoria", post.Categoria));
                 comando.ExecuteNonQuery();
             }
             return RedirectToAction("Index");
