@@ -1,4 +1,5 @@
-﻿using BlogTeste2.Models;
+﻿using BlogTeste2.Infra;
+using BlogTeste2.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,10 +16,8 @@ namespace BlogTeste2.Controllers
         public ActionResult Index()
         {
             var lista = new List<Post>();
-            string stringConexao = ConfigurationManager.ConnectionStrings["blog"].ConnectionString;
-            using (SqlConnection cnx = new SqlConnection(stringConexao))
+            using (SqlConnection cnx = ConnectionFactory.CriaConexaoAberta())
             {
-                cnx.Open();
                 SqlCommand comando = cnx.CreateCommand();
                 comando.CommandText = "select * from Posts";
                 SqlDataReader leitor = comando.ExecuteReader();
@@ -45,10 +44,8 @@ namespace BlogTeste2.Controllers
         [HttpPost]
         public ActionResult AdicionaPost(Post post)
         {
-            string stringConexao = ConfigurationManager.ConnectionStrings["blog"].ConnectionString;
-            using (SqlConnection cnx = new SqlConnection(stringConexao))
+            using (SqlConnection cnx = ConnectionFactory.CriaConexaoAberta())
             {
-                cnx.Open();
                 SqlCommand comando = cnx.CreateCommand();
                 comando.CommandText = "insert into Posts (titulo, resumo, categoria) values (@titulo, @resumo, @categoria)";
                 comando.Parameters.Add(new SqlParameter("titulo", post.Titulo));
