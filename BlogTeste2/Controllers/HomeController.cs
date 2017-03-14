@@ -15,25 +15,11 @@ namespace BlogTeste2.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var lista = new List<Post>();
-            using (SqlConnection cnx = ConnectionFactory.CriaConexaoAberta())
+            using (BlogContext contexto = new BlogContext())
             {
-                SqlCommand comando = cnx.CreateCommand();
-                comando.CommandText = "select * from Posts";
-                SqlDataReader leitor = comando.ExecuteReader();
-                while (leitor.Read())
-                {
-                    Post post = new Post()
-                    {
-                        Id = Convert.ToInt32(leitor["id"]),
-                        Titulo = Convert.ToString(leitor["titulo"]),
-                        Resumo = Convert.ToString(leitor["resumo"]),
-                        Categoria = Convert.ToString(leitor["categoria"])
-                    };
-                    lista.Add(post);
-                }
+                var lista = contexto.Posts.ToList();
+                return View(lista);
             }
-            return View(lista);
         }
 
         public ActionResult NovoPost()
@@ -44,16 +30,12 @@ namespace BlogTeste2.Controllers
         [HttpPost]
         public ActionResult AdicionaPost(Post post)
         {
-            using (SqlConnection cnx = ConnectionFactory.CriaConexaoAberta())
+            using (BlogContext contexto = new BlogContext())
             {
-                SqlCommand comando = cnx.CreateCommand();
-                comando.CommandText = "insert into Posts (titulo, resumo, categoria) values (@titulo, @resumo, @categoria)";
-                comando.Parameters.Add(new SqlParameter("titulo", post.Titulo));
-                comando.Parameters.Add(new SqlParameter("resumo", post.Resumo));
-                comando.Parameters.Add(new SqlParameter("categoria", post.Categoria));
-                comando.ExecuteNonQuery();
+                contexto.Posts.Add(post);
+                contexto.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
         }
     }
 }
