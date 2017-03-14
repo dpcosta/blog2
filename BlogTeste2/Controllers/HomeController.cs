@@ -37,5 +37,15 @@ namespace BlogTeste2.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public ActionResult Categoria([Bind(Prefix = "id")] string categoria)
+        {
+            using (BlogContext contexto = new BlogContext())
+            {
+                //var lista = contexto.Posts.Where(post => post.Categoria.Contains(categoria)).ToList();
+                var lista = from p in contexto.Posts where p.Categoria.Contains(categoria) select p;
+                return View("Index", lista.ToList());
+            }
+        }
     }
 }
