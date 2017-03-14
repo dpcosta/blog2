@@ -3,6 +3,7 @@ using BlogTeste2.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -54,6 +55,26 @@ namespace BlogTeste2.Controllers
             {
                 var post = contexto.Posts.Find(id);
                 contexto.Posts.Remove(post);
+                contexto.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult Visualiza(int id)
+        {
+            using (var contexto = new BlogContext())
+            {
+                var post = contexto.Posts.Find(id);
+                 return View(post);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditaPost(Post post)
+        {
+            using (var contexto = new BlogContext())
+            {
+                contexto.Entry(post).State = EntityState.Modified;
                 contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
