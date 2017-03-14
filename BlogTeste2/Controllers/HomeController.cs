@@ -47,5 +47,16 @@ namespace BlogTeste2.Controllers
                 return View("Index", lista.ToList());
             }
         }
+
+        public ActionResult RemovePost(int id)
+        {
+            using (var contexto = new BlogContext())
+            {
+                var post = contexto.Posts.Find(id);
+                contexto.Posts.Remove(post);
+                contexto.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
