@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BlogTeste2.Models
 {
@@ -11,5 +8,7 @@ namespace BlogTeste2.Models
         public string Titulo { get; set; }
         public string Resumo { get; set; }
         public string Categoria { get; set; }
+        public bool Publicado { get; set; }
+        public DateTime? DataPublicacao { get; set; }
     }
 }
