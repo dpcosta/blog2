@@ -60,6 +60,18 @@ namespace BlogTeste2.Controllers
             }
         }
 
+        public ActionResult PublicaPost(int id)
+        {
+            using (var contexto = new BlogContext())
+            {
+                var post = contexto.Posts.Find(id);
+                post.Publicado = true;
+                post.DataPublicacao = DateTime.Now;
+                contexto.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
         public ActionResult Visualiza(int id)
         {
             using (var contexto = new BlogContext())
