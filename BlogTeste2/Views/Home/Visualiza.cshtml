@@ -1,11 +1,5 @@
 ﻿@model BlogTeste2.Models.Post
-
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -18,11 +12,11 @@
             <input type="hidden" name="publicado" value="@Model.Publicado.ToString()" />
             <input type="hidden" name="dataPublicacao" value="@Model.DataPublicacao" />
             <label>
-                Título: <input name="titulo" value="@Model.Titulo" />
+                Título: <input name="titulo" value="@Model.Titulo" maxlength="20" required />
             </label>
             @Html.ValidationMessage("titulo")
             <label>
-                Resumo: <input name="resumo" value="@Model.Resumo" />
+                Resumo: <input name="resumo" value="@Model.Resumo" required />
             </label>
             @Html.ValidationMessage("resumo")
             <label>
@@ -32,5 +26,10 @@
             <button type="submit">Cadastrar</button>
         </form>
     </div>
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+	    $("form").validate();
+    </script>
 </body>
 </html>
