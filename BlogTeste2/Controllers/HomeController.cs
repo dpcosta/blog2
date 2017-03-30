@@ -25,7 +25,8 @@ namespace BlogTeste2.Controllers
 
         public ActionResult NovoPost()
         {
-            return View();
+            var model = new Post();
+            return View(model);
         }
 
         [HttpPost]
@@ -41,7 +42,7 @@ namespace BlogTeste2.Controllers
                 }
             } else
             {
-                return View("NovoPost");
+                return View("NovoPost", post);
             }
         }
 
