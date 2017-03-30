@@ -31,11 +31,17 @@ namespace BlogTeste2.Controllers
         [HttpPost]
         public ActionResult AdicionaPost(Post post)
         {
-            using (BlogContext contexto = new BlogContext())
+             if (ModelState.IsValid)
             {
-                contexto.Posts.Add(post);
-                contexto.SaveChanges();
-                return RedirectToAction("Index");
+                using (BlogContext contexto = new BlogContext())
+                {
+                    contexto.Posts.Add(post);
+                    contexto.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            } else
+            {
+                return View("NovoPost");
             }
         }
 
@@ -84,11 +90,17 @@ namespace BlogTeste2.Controllers
         [HttpPost]
         public ActionResult EditaPost(Post post)
         {
-            using (var contexto = new BlogContext())
+            if (ModelState.IsValid)
             {
-                contexto.Entry(post).State = EntityState.Modified;
-                contexto.SaveChanges();
-                return RedirectToAction("Index");
+                using (var contexto = new BlogContext())
+                {
+                    contexto.Entry(post).State = EntityState.Modified;
+                    contexto.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            } else
+            {
+                return View("Visualiza", post);
             }
         }
     }

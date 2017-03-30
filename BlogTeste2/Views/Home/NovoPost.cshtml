@@ -17,12 +17,15 @@
             <label>
                 Título: <input name="titulo" />
             </label>
+            @Html.ValidationMessage("titulo")
             <label>
                 Resumo: <input name="resumo" />
             </label>
+            @Html.ValidationMessage("resumo")
             <label>
                 Categoria: <input name="categoria" />
             </label>
+            @Html.ValidationMessage("categoria")
             <button type="submit">Cadastrar</button>
         </form>
     </div>
