@@ -7,7 +7,7 @@ namespace BlogTeste2.Models
     {
         public int Id { get; set; }
 
-        [Required] [StringLength(50)]
+        [Required] [StringLength(50)] [Display(Name = "Título")]
         public string Titulo { get; set; }
 
         [Required]
