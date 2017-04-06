@@ -104,5 +104,18 @@ namespace BlogTeste2.Controllers
                 return View("Visualiza", post);
             }
         }
+
+        [HttpPost]
+        public ActionResult CategoriaAutocomplete(string term)
+        {
+            using (var contexto = new BlogContext())
+            {
+                var model = contexto.Posts.ToList()
+                    .Where(p => p.Categoria.Contains(term))
+                    .Select(p => new { label = p.Categoria })
+                    .Distinct();
+                return Json(model);
+            }
+        }
     }
 }
