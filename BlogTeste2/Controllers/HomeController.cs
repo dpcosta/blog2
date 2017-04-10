@@ -117,5 +117,17 @@ namespace BlogTeste2.Controllers
                 return Json(model);
             }
         }
+
+        public ActionResult Busca(string termo)
+        {
+            using (var contexto = new BlogContext())
+            {
+                var model = contexto.Posts
+                    .Where(p => (p.Publicado) && (p.Titulo.Contains(termo) || p.Resumo.Contains(termo)))
+                    .Select(p => p)
+                    .ToList();
+                return View("Index", model);
+            }
+        }
     }
 }
