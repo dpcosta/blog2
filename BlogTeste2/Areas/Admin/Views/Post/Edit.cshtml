@@ -1,17 +1,14 @@
 ﻿@model BlogTeste2.Models.Post
-
-@using (Html.BeginForm("EditaPost", "Home"))
+<h1>Editar Post</h1>
+@using (Html.BeginForm())
 {
-
     @Html.HiddenFor(p => p.Id)
     @Html.HiddenFor(p => p.Publicado)
     @Html.HiddenFor(p => p.DataPublicacao)
-
     @Html.EditorFor(p => p)
-
-    <button type="submit">Cadastrar</button>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
 }
-
-@section Scripts{
+@section Scripts
+{
     @Html.Partial("_Scripts")
 }
