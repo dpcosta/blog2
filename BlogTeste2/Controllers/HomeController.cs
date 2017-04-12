@@ -7,11 +7,22 @@ namespace BlogTeste2.Controllers
 {
     public class HomeController : Controller
     {
+        private BlogContext contexto;
         private PostDAO dao;
 
         public HomeController()
         {
-            dao = new PostDAO();
+            contexto = new BlogContext();
+            dao = new PostDAO(contexto);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                contexto.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         public ActionResult Index()

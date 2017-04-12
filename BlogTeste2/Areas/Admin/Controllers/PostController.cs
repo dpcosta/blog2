@@ -8,11 +8,22 @@ namespace BlogTeste2.Areas.Admin.Controllers
 {
     public class PostController : Controller
     {
+        private BlogContext contexto;
         private PostDAO dao;
 
         public PostController()
         {
-            dao = new PostDAO();
+            contexto = new BlogContext();
+            dao = new PostDAO(contexto);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                contexto.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         public ActionResult Index()

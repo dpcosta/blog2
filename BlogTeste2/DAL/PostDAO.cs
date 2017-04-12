@@ -11,9 +11,9 @@ namespace BlogTeste2.DAL
     {
         private BlogContext contexto;
 
-        public PostDAO()
+        public PostDAO(BlogContext contexto)
         {
-            this.contexto = new BlogContext();
+            this.contexto = contexto;
         }
 
         public IEnumerable<Post> PostsMaisRecentes()
