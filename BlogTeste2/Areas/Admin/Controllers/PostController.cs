@@ -1,27 +1,23 @@
-﻿using BlogTeste2.Infra;
+﻿using BlogTeste2.DAL;
+using BlogTeste2.Infra;
 using BlogTeste2.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BlogTeste2.Areas.Admin.Controllers
 {
     public class PostController : Controller
     {
-        private BlogContext contexto;
+        private PostDAO dao;
 
         public PostController()
         {
-            this.contexto = new BlogContext();
+            dao = new PostDAO();
         }
 
-        // GET: Admin/Post
         public ActionResult Index()
         {
-            var lista = contexto.Posts.ToList();
+            var lista = dao.TodosPosts().ToList();
             return View(lista);
         }
 
@@ -36,8 +32,7 @@ namespace BlogTeste2.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                contexto.Posts.Add(post);
-                contexto.SaveChanges();
+                dao.Adiciona(post);
                 return RedirectToAction("Index");
             } else
             {
@@ -48,7 +43,7 @@ namespace BlogTeste2.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var model = contexto.Posts.Where(p => p.Id == id).FirstOrDefault();
+            var model = dao.BuscaPorId(id);
             return View(model);
         }
 
@@ -57,8 +52,7 @@ namespace BlogTeste2.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                contexto.Entry(post).State = EntityState.Modified;
-                contexto.SaveChanges();
+                dao.Atualiza(post);
                 return RedirectToAction("Index");
             } else
             {
@@ -68,25 +62,20 @@ namespace BlogTeste2.Areas.Admin.Controllers
 
         public ActionResult Remover(int id)
         {
-            var postAExcluir = contexto.Posts.Where(p => p.Id == id).FirstOrDefault();
-            contexto.Posts.Remove(postAExcluir);
-            contexto.SaveChanges();
+            dao.Remove(id);
             return RedirectToAction("Index");
         }
 
         public ActionResult Publicar(int id)
         {
-            var postAPublicar = contexto.Posts.Where(p => p.Id == id).FirstOrDefault();
-            postAPublicar.Publicado = true;
-            postAPublicar.DataPublicacao = DateTime.Now;
-            contexto.SaveChanges();
+            dao.Publica(id);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult CategoriaAutocomplete(string term)
         {
-            var model = contexto.Posts.ToList()
+            var model = dao.TodosPosts().ToList()
                 .Where(p => p.Categoria.Contains(term))
                 .Select(p => new { label = p.Categoria })
                 .Distinct();
