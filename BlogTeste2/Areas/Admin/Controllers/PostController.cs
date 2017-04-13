@@ -1,5 +1,4 @@
 ﻿using BlogTeste2.DAL;
-using BlogTeste2.Infra;
 using BlogTeste2.Models;
 using System.Linq;
 using System.Web.Mvc;
@@ -8,22 +7,11 @@ namespace BlogTeste2.Areas.Admin.Controllers
 {
     public class PostController : Controller
     {
-        private BlogContext contexto;
         private PostDAO dao;
 
-        public PostController()
+        public PostController(PostDAO dao)
         {
-            contexto = new BlogContext();
-            dao = new PostDAO(contexto);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                contexto.Dispose();
-            }
-            base.Dispose(disposing);
+            this.dao = dao;
         }
 
         public ActionResult Index()
