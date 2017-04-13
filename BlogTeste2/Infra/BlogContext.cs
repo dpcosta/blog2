@@ -1,9 +1,10 @@
 ﻿using BlogTeste2.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
 namespace BlogTeste2.Infra
 {
-    public class BlogContext : DbContext
+    public class BlogContext : IdentityDbContext<Usuario>
     {
         public BlogContext() : base("name=blog")
         {

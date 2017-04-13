@@ -1,5 +1,7 @@
 namespace BlogTeste2.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,18 +16,16 @@ namespace BlogTeste2.Migrations
 
         protected override void Seed(BlogTeste2.Infra.BlogContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            var passwordHash = new PasswordHasher();
+            string password = passwordHash.HashPassword("admin");
+            Usuario usuarioAdmin = new Usuario
+            {
+                UserName = "admin",
+                PasswordHash = password,
+                UltimoLogin = DateTime.Now,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            context.Users.AddOrUpdate(u => u.UserName, usuarioAdmin);
         }
     }
 }

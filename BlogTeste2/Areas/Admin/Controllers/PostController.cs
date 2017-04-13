@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace BlogTeste2.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private PostDAO dao;

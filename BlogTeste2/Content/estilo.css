@@ -49,3 +49,14 @@ main>form+p {
 	top: 5px;
 	right: 5px;
 }
+
+#login-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 15%;
+}
+
+#login-form button {
+    margin-top: 20px;
+}

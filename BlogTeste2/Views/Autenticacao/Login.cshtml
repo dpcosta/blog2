@@ -1,0 +1,34 @@
+﻿@model BlogTeste2.Models.LoginViewModel
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resenha Cultural - Login</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" class="href">
+    <link rel="stylesheet" href="~/Content/estilo.css" class="href">
+</head>
+<body>
+    <div class="container">
+        <main id="login-form">
+            <h2>Resenha Cultural - Login</h2>
+            @Html.ValidationSummary()
+            @using (Html.BeginForm())
+            {
+                @Html.LabelFor(l => l.LoginName)
+                @Html.TextBoxFor(l => l.LoginName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(l => l.LoginName)
+
+                @Html.LabelFor(l => l.Password)
+                @Html.TextBoxFor(l => l.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(l => l.Password)
+
+                <button class="btn btn-primary" type="submit">Login</button>
+            }
+        </main>
+    </div>
+</body>
+</html>
