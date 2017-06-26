@@ -1,0 +1,47 @@
+﻿@model BlogTeste2.Models.RegistroViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre-se no blog Resenha Cultural!</title>
+    <link rel="stylesheet" href="~/Content/Reset.css" class="href">
+    <link rel="stylesheet" href="~/Content/bootstrap.css" class="href">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <h2>Registro</h2>
+            @using (Html.BeginForm())
+            {
+                <div class="has-error">
+                    @Html.ValidationSummary()
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(u => u.LoginName)
+                    @Html.TextBoxFor(u => u.LoginName, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(u => u.Email)
+                    @Html.TextBoxFor(u => u.Email, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(u => u.Senha)
+                    @Html.PasswordFor(u => u.Senha, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(u => u.ConfirmacaoSenha)
+                    @Html.PasswordFor(u => u.ConfirmacaoSenha, new { @class = "form-control" })
+                </div>
+
+                <button class="btn btn-default" type="submit">Registrar</button>
+            }
+
+        </main>
+    </div>
+</body>
+</html>
