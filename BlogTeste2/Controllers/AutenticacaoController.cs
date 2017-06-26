@@ -38,5 +38,22 @@ namespace BlogTeste2.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult UsuarioLogado()
+        {
+            UsuarioManager manager = HttpContext.GetOwinContext().GetUserManager<UsuarioManager>();
+            var user = manager.FindById(User.Identity.GetUserId());
+            return View(user);
+        }
     }
 }

@@ -289,12 +289,12 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Post.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Scripts.cshtml" />
     <Content Include="Views\Shared\Cabecalho.cshtml" />
     <Content Include="Views\Shared\Rodape.cshtml" />
     <Content Include="Views\Shared\Lateral.cshtml" />
     <Content Include="Views\Autenticacao\Login.cshtml" />
+    <Content Include="Views\Autenticacao\UsuarioLogado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

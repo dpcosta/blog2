@@ -1,6 +1,10 @@
 ﻿<aside>
     <h1>Administração</h1>
     <div>
+        @Html.Action("UsuarioLogado", "Autenticacao", new { area = "" })
+        <a class="btn btn-default btn-sm" href="/Autenticacao/Logout">Sair</a>
+    </div>
+    <div>
         <ul>
             <li>@Html.ActionLink("Posts", "Index", "Post")</li>
         </ul>
